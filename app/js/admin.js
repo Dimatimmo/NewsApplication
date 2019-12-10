@@ -14,7 +14,6 @@ addBtn.addEventListener('click', showModal);
 
 function showModal() {
   const modalWindow = document.getElementById('modal');
-  console.log(modalWindow);
   modalWindow.style.display = 'block';
 }
 
@@ -36,11 +35,11 @@ let itemsArray = localStorage.getItem('articles') ? JSON.parse(localStorage.getI
 localStorage.setItem('articles', JSON.stringify(itemsArray));
 const data = JSON.parse(localStorage.getItem('articles'));
 
-function articleMaker(title, text ) {
+function articleMaker(title, text, id ) {
   const articleHolder = document.getElementById('articleHolder');
   const article = 
   `
-    <div class="article">
+    <div class="article" data-id="${id}">
       <h1 class="articleTitle">${title}</h1>
       <p class="articleText">${text}</p>
       <input id="title-article-edit" type="text">
@@ -54,6 +53,8 @@ function articleMaker(title, text ) {
   deleteArticleBtn.addEventListener('click',deleteArticle);
   const editArticleBtn = document.querySelector('.editArticle');
   editArticleBtn.addEventListener('click',editArticle);
+  const modalWindow = document.getElementById('modal');
+  modalWindow.style.display = 'none';
 }
 
 
@@ -62,23 +63,32 @@ addArticleBtn.addEventListener('click', function (e) {
   let temp = {};
   temp.title = titleArticle.value;
   temp.text = textArticle.value;
+  temp.id = Math.round((Math.random() * 10**7), 0);
   let i = itemsArray.length
   itemsArray[i] = temp;
 
   localStorage.setItem('articles', JSON.stringify(itemsArray));
-  articleMaker(titleArticle.value,textArticle.value );
+  articleMaker(titleArticle.value,textArticle.value, temp.id  );
   titleArticle.value = "";
   textArticle.value = "";
 });
 
 data.forEach((itemsArray) => {
-  articleMaker(itemsArray.title, itemsArray.text);
+  articleMaker(itemsArray.title, itemsArray.text, itemsArray.id);
 });
 
-function deleteArticle() {
-  const singleArticle = this.parentNode;
-  singleArticle.remove(singleArticle);
-  JSON.parse(localStorage.getItem('articles'))
+function deleteArticle(e) {
+  const id = this.parentNode.getAttribute('data-id');
+  console.log(id);
+  for (let i = 0; i < itemsArray.length ; i++){
+    console.log(id + " == " + itemsArray[i]['id']);
+    if(id == itemsArray[i]['id']){
+      itemsArray.splice(i, 1);
+      localStorage.setItem('articles', JSON.stringify(itemsArray)); 
+      const singleArticle = this.parentNode;
+      singleArticle.remove(singleArticle); break
+    }
+  }
 }
 
 function editArticle() {
