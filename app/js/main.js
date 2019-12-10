@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 
-function checkInput() {
+function checkInputRequire() {
   if(document.getElementById('email').value != 0 && document.getElementById('password').value != 0) {
     btn.removeAttribute('disabled');
   } else {

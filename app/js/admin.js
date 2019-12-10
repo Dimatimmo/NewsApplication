@@ -69,20 +69,16 @@ addArticleBtn.addEventListener('click', function (e) {
 
   localStorage.setItem('articles', JSON.stringify(itemsArray));
   articleMaker(titleArticle.value,textArticle.value, temp.id  );
-  titleArticle.value = "";
-  textArticle.value = "";
 });
 
-function deleteArticle(e) {
+function deleteArticle() {
   const id = this.parentNode.getAttribute('data-id');
-  for (let i = 0; i < itemsArray.length ; i++){
-    if(id == itemsArray[i]['id']){
-      itemsArray.splice(i, 1);
-      localStorage.setItem('articles', JSON.stringify(itemsArray)); 
-      const singleArticle = this.parentNode;
-      singleArticle.remove(singleArticle); break
-    }
-  }
+  let idLnArray = itemsArray.findIndex(x => x.id == id);
+  itemsArray.splice(idLnArray, 1);
+  localStorage.setItem('articles', JSON.stringify(itemsArray)); 
+  const singleArticle = this.parentNode;
+  singleArticle.remove(singleArticle);
+
 }
 
 function editArticle() {
