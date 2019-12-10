@@ -1,0 +1,33 @@
+.modal-form {
+  display: none;
+}
+
+a{
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.article {
+  input{
+    display: none;
+  }
+  textarea{
+    display: none;
+  } 
+}
+
+.editMode{
+  input{
+    display: block;
+  }
+  textarea{
+    display: block;
+  }
+  h1{
+    display: none;
+  }
+  p{
+    display: none;
+  }
+}
