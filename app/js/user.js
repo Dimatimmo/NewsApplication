@@ -14,7 +14,7 @@ let itemsArray = localStorage.getItem('articles') ? JSON.parse(localStorage.getI
 localStorage.setItem('articles', JSON.stringify(itemsArray));
 const data = JSON.parse(localStorage.getItem('articles'));
 
-function articleMaker(title, text ) {
+function articleMakerUser(title, text ) {
   const articleHolder = document.getElementById('articleHolder');
   const article = 
   `
@@ -23,9 +23,9 @@ function articleMaker(title, text ) {
       <p>${text}</p>
     </div>
   `
-  articleHolder.insertAdjacentHTML('beforeend', article);
+  articleHolder.insertAdjacentHTML('afterbegin', article);
 }
 
 data.forEach((itemsArray) => {
-  articleMaker(itemsArray.title, itemsArray.text);
+  articleMakerUser(itemsArray.title, itemsArray.text);
 });

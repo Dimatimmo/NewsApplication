@@ -9,15 +9,24 @@
 </head>
 <body>
   <div id="wrapper">
-    <form action="#" class="signIn-form"> 	
-      <fieldset> 		 	
-        <label for="email" ">Email</label>
-        <input id="email" placeholder="Input your email" onkeyup="checkInput()">
-        <label for="password">Password</label>
-        <input id="password" placeholder="Input your password" onkeyup="checkInput()">
-        <button id="btn" disabled>Sign In</button>
-      </fieldset> 
-    </form>
+    <div class="container">
+      <div class="form-holder">
+        <form action="#" class="signIn-form"> 	
+          <fieldset> 		 	
+            <div class="email-holder">
+              <label for="email" ">Email</label>
+              <input id="email" placeholder="Input your email" onkeyup="checkInput()">
+            </div>
+            <div class="password-holder">
+              <label for="password">Password</label>
+              <input id="password" placeholder="Input your password" onkeyup="checkInput()">
+            </div>
+            <a href="#" id="btn" class="signButton" disabled>Sign In</a>
+          </fieldset> 
+        </form>
+      </div>
+    </div>
+    
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="js/main.js"></script>
 </body>

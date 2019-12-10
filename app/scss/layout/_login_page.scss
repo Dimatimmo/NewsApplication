@@ -1,0 +1,32 @@
+#wrapper {
+  background: #f2f2f2;
+  padding: 20px 0 20px;
+}
+.container {
+  max-width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto; 
+}
+.form-holder{
+  max-width: 500px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.email-holder{
+  margin-bottom: 10px;
+}
+.email-holder,
+.password-holder{
+  display: flex;
+  justify-content: space-around;
+}
+
+.signButton {
+  min-width: 100px;
+  max-width: 100px;
+  margin: 0 auto;
+  display: block;
+}

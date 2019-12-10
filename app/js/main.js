@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
   function login(e) {
-    const emailInput = document.getElementById('email').value ;
-    const passwordInput = document.getElementById('password').value;
+    const email = document.getElementById('email').value ;
+    const password = document.getElementById('password').value;
     e.preventDefault();
-    if(emailInput === adminEmail && passwordInput.length < 8 && passwordInput.length != 0  ) {
+    if(email === adminEmail && password.length < 8 && password.length ) {
       window.location.href = "../pages/admin.html";
     } else {
       window.location.href = "../pages/user.html";

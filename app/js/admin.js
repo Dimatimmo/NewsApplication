@@ -33,7 +33,7 @@ const addArticleBtn = document.getElementById('addArticleBtn');
 let itemsArray = localStorage.getItem('articles') ? JSON.parse(localStorage.getItem('articles')) : [];
 
 localStorage.setItem('articles', JSON.stringify(itemsArray));
-const data = JSON.parse(localStorage.getItem('articles'));
+const articleArray = JSON.parse(localStorage.getItem('articles'));
 
 function articleMaker(title, text, id ) {
   const articleHolder = document.getElementById('articleHolder');
@@ -71,10 +71,6 @@ addArticleBtn.addEventListener('click', function (e) {
   articleMaker(titleArticle.value,textArticle.value, temp.id  );
   titleArticle.value = "";
   textArticle.value = "";
-});
-
-data.forEach((itemsArray) => {
-  articleMaker(itemsArray.title, itemsArray.text, itemsArray.id);
 });
 
 function deleteArticle(e) {
@@ -122,3 +118,6 @@ function editArticle() {
   singleArticle.classList.toggle('editMode');
 }
 
+articleArray.forEach((itemsArray) => {
+  articleMaker(itemsArray.title, itemsArray.text, itemsArray.id);
+});
