@@ -79,9 +79,7 @@ data.forEach((itemsArray) => {
 
 function deleteArticle(e) {
   const id = this.parentNode.getAttribute('data-id');
-  console.log(id);
   for (let i = 0; i < itemsArray.length ; i++){
-    console.log(id + " == " + itemsArray[i]['id']);
     if(id == itemsArray[i]['id']){
       itemsArray.splice(i, 1);
       localStorage.setItem('articles', JSON.stringify(itemsArray)); 
@@ -101,11 +99,17 @@ function editArticle() {
 
   
   const containsClass = singleArticle.classList.contains('editMode');
-  console.log(title.innerText);
-  console.log(text.innerText);
   if (containsClass){
-    title.innerText = editTitleInput.value;
-    text.innerText = editTextInput.value;
+    const id = this.parentNode.getAttribute('data-id');
+    for (let i = 0; i < itemsArray.length ; i++){
+      if(id == itemsArray[i]['id']){
+        title.innerText = editTitleInput.value;
+        text.innerText = editTextInput.value;
+        itemsArray[i].title = editTitleInput.value;
+        itemsArray[i].text = editTextInput.value;
+        localStorage.setItem('articles', JSON.stringify(itemsArray));  break
+      }
+    }
     editButton.innerText = 'Редактировать';
   }else {
     titleArticle.value = title.innerText;
