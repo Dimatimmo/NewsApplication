@@ -1,11 +1,23 @@
 #wrapper {
   background: #f2f2f2;
   padding: 20px 0 20px;
+  height: 100vh;
 }
 .container {
   max-width: 1200px;
   padding: 0 20px;
   margin: 0 auto; 
+}
+
+a{
+  &:hover{
+    @include animate(background color border)
+  }
+}
+
+input {
+  outline: none;
+  border: none;
 }
 .form-holder{
   max-width: 500px;
@@ -13,20 +25,52 @@
   background: #fff;
   border-radius: 10px;
   padding: 10px;
+  max-width: 390px;
 }
 
-.email-holder{
-  margin-bottom: 10px;
-}
+
 .email-holder,
 .password-holder{
   display: flex;
   justify-content: space-around;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.emailInput,
+.passwordInput {
+  font-family: Poppins-Regular;
+  font-size: 15px;
+  color: #555555;
+  line-height: 1.2;
+  display: block;
+  width: 100%;
+  height: 45px;
+  background: transparent;
+  padding: 0 5px;
+  box-shadow: 0 1px 0 0 #e5e5e5;
+  &:focus {
+    box-shadow: 0 2px 0 0 green;
+  }
+}
+
+.labelEmail,
+.labelPswrd{
+  position: absolute;
 }
 
 .signButton {
-  min-width: 100px;
-  max-width: 100px;
   margin: 0 auto;
   display: block;
+  text-align: center;
+  border: 2px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 3px;
+  color: #000;
+  padding: 10px;
+  &:hover{
+    color: black;
+    border-color: black;
+    
+  }
 }

@@ -1,42 +1,44 @@
-document.addEventListener('DOMContentLoaded', function(){ 
-  
-});
+const logout = document.querySelector('.logout');
+const addBtn = document.querySelector('.addRecord');
+const cancelBtn = document.querySelector('.cancel');
+const titleArticle = document.querySelector('.title-article');
+const textArticle = document.querySelector('.text-article');
+const articleHolder = document.querySelector('.articleHolder');
+const addArticleBtn = document.querySelector('.addArticleBtn');
+const saveBtn = document.querySelector('.saveArticle');
+let itemsArray = localStorage.getItem('articles') ? JSON.parse(localStorage.getItem('articles')) : [];
+localStorage.setItem('articles', JSON.stringify(itemsArray));
+const articleArray = JSON.parse(localStorage.getItem('articles'));
+const modalWindow = document.querySelector('.modal-js');
 
-const logout = document.getElementById('logout');
-logout.addEventListener('click', logoutUser);
+
+
+eventBinding();
+
+function eventBinding() {
+  addArticleBtn.addEventListener('click', createArticle);
+  logout.addEventListener('click', logoutUser);
+  cancelBtn.addEventListener('click', cancelModal);
+  addBtn.addEventListener('click', showModal);
+}
 
 function logoutUser() {
   window.location.href = "../index.html";
 }
 
-const addBtn = document.getElementById('addRecord')
-addBtn.addEventListener('click', showModal);
-
 function showModal() {
-  const modalWindow = document.getElementById('modal');
+  titleArticle.value = '';
+  textArticle.value = '';
   modalWindow.style.display = 'block';
+  saveBtn.style.display = 'none';
 }
-
-const cancelBtn = document.getElementById('cancel');
-cancelBtn.addEventListener('click', cancelModal);
 
 function cancelModal(e) {
   e.preventDefault();
-  const modalWindow = document.getElementById('modal');
   modalWindow.style.display = 'none';
 }
 
-const titleArticle = document.getElementById('title-article');
-const textArticle = document.getElementById('text-article');
-const articleHolder = document.getElementById('articleHolder');
-const addArticleBtn = document.getElementById('addArticleBtn');
-let itemsArray = localStorage.getItem('articles') ? JSON.parse(localStorage.getItem('articles')) : [];
-
-localStorage.setItem('articles', JSON.stringify(itemsArray));
-const articleArray = JSON.parse(localStorage.getItem('articles'));
-
 function articleMaker(title, text, id ) {
-  const articleHolder = document.getElementById('articleHolder');
   const article = 
   `
     <div class="article" data-id="${id}">
@@ -49,27 +51,27 @@ function articleMaker(title, text, id ) {
     </div>
   `
   articleHolder.insertAdjacentHTML('afterbegin', article);
+  articleMakerEventBinding();
+  modalWindow.style.display = 'none';
+}
+
+function articleMakerEventBinding () {
   const deleteArticleBtn = document.querySelector('.deleteArticle');
   deleteArticleBtn.addEventListener('click',deleteArticle);
   const editArticleBtn = document.querySelector('.editArticle');
   editArticleBtn.addEventListener('click',editArticle);
-  const modalWindow = document.getElementById('modal');
-  modalWindow.style.display = 'none';
 }
 
-
-addArticleBtn.addEventListener('click', function (e) {
+function createArticle(e) {
   e.preventDefault();
   let temp = {};
   temp.title = titleArticle.value;
   temp.text = textArticle.value;
   temp.id = Math.round((Math.random() * 10**7), 0);
-  let i = itemsArray.length
-  itemsArray[i] = temp;
-
+  itemsArray.push(temp);
   localStorage.setItem('articles', JSON.stringify(itemsArray));
   articleMaker(titleArticle.value,textArticle.value, temp.id  );
-});
+}
 
 function deleteArticle() {
   const id = this.parentNode.getAttribute('data-id');
@@ -86,32 +88,22 @@ function editArticle() {
   const singleArticle = this.parentNode; 
   const title = singleArticle.querySelector('.articleTitle');
   const text = singleArticle.querySelector('.articleText');
-  let editTitleInput = singleArticle.querySelector('#title-article-edit');
-  let editTextInput = singleArticle.querySelector('#text-article-edit');
-
-  
-  const containsClass = singleArticle.classList.contains('editMode');
-  if (containsClass){
-    const id = this.parentNode.getAttribute('data-id');
-    for (let i = 0; i < itemsArray.length ; i++){
-      if(id == itemsArray[i]['id']){
-        title.innerText = editTitleInput.value;
-        text.innerText = editTextInput.value;
-        itemsArray[i].title = editTitleInput.value;
-        itemsArray[i].text = editTextInput.value;
-        localStorage.setItem('articles', JSON.stringify(itemsArray));  break
-      }
-    }
-    editButton.innerText = 'Редактировать';
-  }else {
-    titleArticle.value = title.innerText;
-    textArticle.value = text.innerText;
-    editTitleInput.value = titleArticle.value;
-    editTextInput.value = titleArticle.value;
-    
-    editButton.innerText = 'Сохранить';
-  }
-  singleArticle.classList.toggle('editMode');
+  const id = this.parentNode.getAttribute('data-id');
+  let idLnArray = itemsArray.findIndex(x => x.id == id);
+  modalWindow.style.display = 'block';
+  addArticleBtn.style.display = 'none';
+  saveBtn.style.display = 'block'
+  titleArticle.value = title.innerText;
+  textArticle.value = text.innerText;
+  saveBtn.addEventListener('click', function() {
+    itemsArray[idLnArray].title = titleArticle.value;
+    itemsArray[idLnArray].text = textArticle.value;
+    title.innerText = titleArticle.value;
+    text.innerText = textArticle.value;
+    localStorage.setItem('articles', JSON.stringify(itemsArray)); 
+    modalWindow.style.display = 'none';
+    addArticleBtn.style.display = 'block';
+  }) 
 }
 
 articleArray.forEach((itemsArray) => {
