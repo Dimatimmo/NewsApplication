@@ -1,31 +1,29 @@
-const logout = document.getElementById('logout');
+const logout = document.querySelector('.logout');
 logout.addEventListener('click', logoutUser);
 
 function logoutUser() {
   window.location.href = "../index.html";
 }
 
-const titleArticle = document.getElementById('title-article');
-const textArticle = document.getElementById('text-article');
-const articleHolder = document.getElementById('articleHolder');
-const addArticleBtn = document.getElementById('addArticleBtn');
+const titleArticle = document.querySelector('.title-article');
+const textArticle = document.querySelector('.text-article')
+const articleHolder = document.querySelector('.articleHolder');
 let itemsArray = localStorage.getItem('articles') ? JSON.parse(localStorage.getItem('articles')) : [];
 
 localStorage.setItem('articles', JSON.stringify(itemsArray));
-const data = JSON.parse(localStorage.getItem('articles'));
+const articleArray = JSON.parse(localStorage.getItem('articles'));
 
-function articleMakerUser(title, text ) {
-  const articleHolder = document.getElementById('articleHolder');
+function articleMakerUser(title, text, id ) {
   const article = 
   `
-    <div>
-      <h1>${title}</h1>
-      <p>${text}</p>
-    </div>
+  <div class="article" data-id="${id}">
+    <h1 class="articleTitle">${title}</h1>
+    <p class="articleText userText">${text}</p>
+</div>
   `
   articleHolder.insertAdjacentHTML('afterbegin', article);
 }
 
-data.forEach((itemsArray) => {
+articleArray.forEach((itemsArray) => {
   articleMakerUser(itemsArray.title, itemsArray.text);
 });

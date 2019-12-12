@@ -1,20 +1,3 @@
-#wrapper {
-  background: #f2f2f2;
-  padding: 20px 0 20px;
-  height: 100vh;
-}
-.container {
-  max-width: 1200px;
-  padding: 0 20px;
-  margin: 0 auto; 
-}
-
-a{
-  &:hover{
-    @include animate(background color border)
-  }
-}
-
 input {
   outline: none;
   border: none;
@@ -32,8 +15,8 @@ input {
 .email-holder,
 .password-holder{
   display: flex;
-  justify-content: space-around;
-  position: relative;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -52,11 +35,6 @@ input {
   &:focus {
     box-shadow: 0 2px 0 0 green;
   }
-}
-
-.labelEmail,
-.labelPswrd{
-  position: absolute;
 }
 
 .signButton {

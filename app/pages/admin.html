@@ -10,23 +10,23 @@
 <body>
   <div id="wrapper">
     <header id="header">
-      <button type="submit" class="logout">Logout</button>
-      <a href="#" class="addRecord">add</a>
+      <div class="container header-holder">
+        <a href="#" class="logout">Logout</a>
+        <a href="#" class="addRecord">add</a>
+      </div>
     </header>
     <main id="main">
       <div class="modal-form modal-js" id="modal">
         <form action="#" class="article-form"> 			 	
           <input class="title-article" type="text" placeholder="Введите заголовок">
-          <textarea rows="10" cols="45" name="text" class="text-article" placeholder="Введите текст"></textarea>
+          <textarea name="text" class="text-article" placeholder="Введите текст"></textarea>
           <a href="#" class="addArticleBtn">Добавить запись</a>
-          <a class="saveArticle">Сохранить</a>
+          <a href="#" class="saveArticle">Сохранить</a>
           <a href="#" class="cancel">Отмена</a>
         </form>
       </div>
       <div class="articleHolder">
-        
       </div>
-      
     </main>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
