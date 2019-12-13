@@ -10,6 +10,8 @@ let itemsArray = localStorage.getItem('articles') ? JSON.parse(localStorage.getI
 localStorage.setItem('articles', JSON.stringify(itemsArray));
 const articleArray = JSON.parse(localStorage.getItem('articles'));
 const modalWindow = document.querySelector('.modal-js');
+const errorBlock = document.querySelector(".error-holder");
+const error = document.querySelector(".error");
 
 
 
@@ -42,11 +44,11 @@ function articleMaker(title, text, id ) {
   const article = 
   `
     <div class="article" data-id="${id}">
-      <h1 class="articleTitle">${title}</h1>
-      <p class="articleText">${text}</p>
+        <h1 class="articleTitle">${title}</h1>
+        <p class="articleText">${text}</p>
       <input id="title-article-edit" type="text">
       <textarea rows="10" cols="45" name="text" id="text-article-edit" placeholder="Введите текст"></textarea>
-      <a class="editArticle">Редактировать</a>
+      <a href="#wrapper"class="editArticle">Редактировать</a>
       <a class="deleteArticle">Удалить</a>
     </div>
   `
@@ -64,14 +66,26 @@ function articleMakerEventBinding () {
 
 function createArticle(e) {
   e.preventDefault();
-  let temp = {};
-  temp.title = titleArticle.value;
-  temp.text = textArticle.value;
-  temp.id = Math.round((Math.random() * 10**7), 0);
-  itemsArray.push(temp);
-  localStorage.setItem('articles', JSON.stringify(itemsArray));
-  articleMaker(titleArticle.value,textArticle.value, temp.id  );
+  if(titleArticle.value && textArticle.value ) {
+    let temp = {};
+    temp.title = titleArticle.value;
+    temp.text = textArticle.value;
+    temp.id = Math.round((Math.random() * 10**7), 0);
+    itemsArray.push(temp);
+    localStorage.setItem('articles', JSON.stringify(itemsArray));
+    articleMaker(titleArticle.value,textArticle.value, temp.id );
+  } else {
+    errorBlock.style.opacity = 1;
+    setTimeout(errorHide, 2000)
+  }
+  
 }
+
+
+function errorHide (){
+  errorBlock.style.opacity = 0;
+}
+
 
 function deleteArticle() {
   const id = this.parentNode.getAttribute('data-id');

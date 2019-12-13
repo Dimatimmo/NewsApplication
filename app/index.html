@@ -11,6 +11,9 @@
 <body>
   <div id="wrapper">
     <div class="container">
+      <div class="error-holder">
+        <p class="error">Вы ввели некорректные данные</p>
+      </div>
       <div class="form-holder">
         <form action="#" class="signIn-form"> 	
           <fieldset> 		 	
@@ -20,9 +23,9 @@
             </div>
             <div class="password-holder">
               <label for="password" class="labelPswrd">Password</label>
-              <input id="password" class="passwordInput" onkeyup="checkInputRequire()">
+              <input id="password" type ="password" class="passwordInput" onkeyup="checkInputRequire()">
             </div>
-            <a href="#" id="btn" class="signButton" disabled>Sign In</a>
+            <a id="btn" class="signButton" disabled>Sign In</a>
           </fieldset> 
         </form>
       </div>

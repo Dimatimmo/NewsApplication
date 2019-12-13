@@ -3,6 +3,10 @@ body{
   height: 100%;
 }
 
+input[type='password'] {
+  border: none;
+}
+
 #wrapper {
   min-height: 100%;
 }
@@ -18,3 +22,18 @@ a{
     cursor: pointer
   }
 }
+
+header{
+  position: fixed;
+  width: 100%;
+}
+main{
+  padding-top: 21px;
+}
+
+.error-holder{
+  opacity: 0;
+  position: absolute;
+  left: 0;
+}
+
