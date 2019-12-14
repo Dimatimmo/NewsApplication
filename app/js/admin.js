@@ -48,8 +48,8 @@ function articleMaker(title, text, id ) {
         <p class="articleText">${text}</p>
       <input id="title-article-edit" type="text">
       <textarea rows="10" cols="45" name="text" id="text-article-edit" placeholder="Введите текст"></textarea>
-      <a href="#wrapper"class="editArticle">Редактировать</a>
-      <a class="deleteArticle">Удалить</a>
+      <a href="#wrapper"class="btn editArticle">Редактировать</a>
+      <a class="btn deleteArticle">Удалить</a>
     </div>
   `
   articleHolder.insertAdjacentHTML('afterbegin', article);
